@@ -1,7 +1,6 @@
-# RabbitMQ Message Timestamp Plugin #
+# RabbitMQ Topic Authorization #
 
-This plugin fills the `timestamp` property of a message as it enters
-RabbitMQ with the current (server node) timestamp value.
+This plugin checks authorizations on routing keys. It can be used with internally-defined ACLs, as well as external authorization plugins (e.g. rabbitmq-auth-backend-http).
 
 ## Supported RabbitMQ Versions ##
 
@@ -18,8 +17,8 @@ Install and setup the RabbitMQ Public Umbrella as explained here:
 
 Then `cd` into the umbrella folder and type:
 
-    $ git clone git://github.com/rabbitmq/rabbitmq-message-timestamp.git
-    $ cd rabbitmq-message-timestamp
+    $ git clone git://github.com/rabbitmq/rabbitmq-topic-authorization.git
+    $ cd rabbitmq-topic-authorization
     $ make
 
 Finally copy all the `*.ez` files inside the `dist` folder to the
@@ -32,23 +31,17 @@ installation.
 Just enable the plugin with the following command:
 
 ```bash
-rabbitmq-plugins enable rabbitmq_message_timestamp
+rabbitmq-plugins enable rabbitmq_topic_authorization
 ```
 
-The plugin will then hook into the `basic.publish` process in order to
-add the current timestamp as seen by the broker.
+The plugin will then hook into the `basic.publish`, `exchange.bind` and `queue.bind` processes in order to
+check current user authorizations against related routing key.
 
 ## Limitations ##
 
-The plugin hooks into the `basic.publish` path, so expect a small
-throughput reduction when using this plugin, since it has to modify
-every message that crosses RabbitMQ.
-
-If there's enough demand, we could add in the future a way for only
-time-stamping messages that crosses certain exchanges, say by applying
-policies.
+The plugin hooks into the `basic.publish`, `exchange.bind` and `queue.bind` pathes, so there could be a significant performance impact, especially when using external authentication mechanisms (e.G. ldap or http auth plugins). It uses a channel-scoped cache to reduce latency.
 
 ## LICENSE ##
 
 See the LICENSE file
-# rabbitmq-topic-authorization
+
