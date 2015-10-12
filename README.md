@@ -39,7 +39,7 @@ check current user authorizations against related routing key.
 
 ## Limitations ##
 
-The plugin hooks into the `basic.publish`, `exchange.bind` and `queue.bind` pathes, so there could be a significant performance impact, especially when using external authentication mechanisms (e.G. ldap or http auth plugins). It uses a channel-scoped cache to reduce latency.
+The plugin hooks into the `basic.publish`, `exchange.bind` and `queue.bind` paths, so there could be a significant performance impact, especially when using external authentication mechanisms (e.G. ldap or http auth plugins). It uses a channel-scoped cache to reduce latency.
 
 ## LICENSE ##
 
