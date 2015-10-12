@@ -1,0 +1,6 @@
+{application, rabbitmq_topic_authorization,
+ [{description, "RabbitMQ topic-based authorization"},
+  {vsn, "%%VSN%%"},
+  {modules, []},
+  {registered, []},
+  {applications, [kernel, stdlib, rabbit]}]}.
