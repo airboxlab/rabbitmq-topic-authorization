@@ -64,17 +64,17 @@ check_read_permitted(Resource, User) ->
     check_resource_access(User, Resource, read).
 
 intercept(#'basic.publish'{routing_key = RoutingKeyBin} = Method, Content, State) ->
-	RoutingKey = rabbit_misc:r(element(1, State), routing_key, RoutingKeyBin),
+	RoutingKey = rk(State, RoutingKeyBin),
 	check_write_permitted(RoutingKey, element(2, State)),
     {Method, Content};
 
 intercept(#'exchange.bind'{routing_key = RoutingKeyBin} = Method, Content, State) ->
-	RoutingKey = rabbit_misc:r(element(1, State), routing_key, RoutingKeyBin),
-	check_read_permitted(RoutingKey, element(2, State)),
+    RoutingKey = rk(State, RoutingKeyBin),
+    check_read_permitted(RoutingKey, element(2, State)),
     {Method, Content};
 
 intercept(#'queue.bind'{routing_key = RoutingKeyBin} = Method, Content, State) ->
-	RoutingKey = rabbit_misc:r(element(1, State), routing_key, RoutingKeyBin),
+	RoutingKey = rk(State, RoutingKeyBin),
 	check_read_permitted(RoutingKey, element(2, State)),
     {Method, Content};
 
@@ -85,3 +85,6 @@ applies_to() ->
 	['basic.publish'].
 
 %%----------------------------------------------------------------------------
+
+rk(State, RKBin) ->
+	rabbit_misc:r(element(1, State), routing_key, RKBin).
