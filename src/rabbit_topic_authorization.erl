@@ -10,8 +10,8 @@
 %%
 %% The Original Code is RabbitMQ Topic Authorization.
 %%
-%% The Initial Developer of the Original Code is Antoine Galataud for Airboxlab.
-%% Copyright (c) 2015 Airboxlab. All rights reserved.
+%% The Initial Developer of the Original Code is Antoine Galataud for Airboxlab S.A.
+%% Copyright (c) 2015 Airboxlab S.A. All rights reserved.
 %%
 
 -module(rabbit_topic_authorization).
