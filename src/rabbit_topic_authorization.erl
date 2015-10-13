@@ -25,7 +25,7 @@
 
 -record(state, {
     user,
-	vhost
+    vhost
 }).
 
 -rabbit_boot_step({?MODULE,
@@ -49,7 +49,7 @@ description() ->
       <<"Checks authorization based on routing keys">>}].
 
 check_resource_access(User, Resource, Perm) ->
-	V = {Resource, Perm},
+    V = {Resource, Perm},
     Cache = case get(permission_cache) of
                 undefined -> [];
                 Other     -> Other
@@ -72,47 +72,47 @@ check_configure_permitted(Resource, User) ->
     check_resource_access(User, Resource, configure).
 
 intercept(#'basic.publish'{routing_key = RoutingKeyBin} = Method, 
-		  Content, 
-		  _State = #state{user = User, vhost = VHost}) ->
-	RoutingKey = rk(VHost, RoutingKeyBin),
-	check_write_permitted(RoutingKey, User),
+          Content, 
+          _State = #state{user = User, vhost = VHost}) ->
+    RoutingKey = rk(VHost, RoutingKeyBin),
+    check_write_permitted(RoutingKey, User),
     {Method, Content};
 
 intercept(#'exchange.bind'{routing_key = RoutingKeyBin} = Method, 
-		  Content, 
-		  _State = #state{user = User, vhost = VHost}) ->
+          Content, 
+          _State = #state{user = User, vhost = VHost}) ->
     RoutingKey = rk(VHost, RoutingKeyBin),
     check_read_permitted(RoutingKey, User),
     {Method, Content};
 
 intercept(#'exchange.unbind'{routing_key = RoutingKeyBin} = Method, 
-		  Content, 
-		  _State = #state{user = User, vhost = VHost}) ->
+          Content, 
+          _State = #state{user = User, vhost = VHost}) ->
     RoutingKey = rk(VHost, RoutingKeyBin),
     check_configure_permitted(RoutingKey, User),
     {Method, Content};
 
 intercept(#'queue.bind'{routing_key = RoutingKeyBin} = Method, 
-		  Content, 
-		  _State = #state{user = User, vhost = VHost}) ->
-	RoutingKey = rk(VHost, RoutingKeyBin),
-	check_read_permitted(RoutingKey, User),
+          Content, 
+          _State = #state{user = User, vhost = VHost}) ->
+    RoutingKey = rk(VHost, RoutingKeyBin),
+    check_read_permitted(RoutingKey, User),
     {Method, Content};
 
 intercept(#'queue.unbind'{routing_key = RoutingKeyBin} = Method, 
-		  Content, 
-		  _State = #state{user = User, vhost = VHost}) ->
-	RoutingKey = rk(VHost, RoutingKeyBin),
-	check_configure_permitted(RoutingKey, User),
+          Content, 
+          _State = #state{user = User, vhost = VHost}) ->
+    RoutingKey = rk(VHost, RoutingKeyBin),
+    check_configure_permitted(RoutingKey, User),
     {Method, Content};
 
 intercept(Method, Content, _State) ->
     {Method, Content}.
 
 applies_to() -> 
-	['basic.publish', 'queue.bind', 'queue.unbind', 'exchange.bind', 'exchange.unbind'].
+    ['basic.publish', 'queue.bind', 'queue.unbind', 'exchange.bind', 'exchange.unbind'].
 
 %%----------------------------------------------------------------------------
 
 rk(VHost, RKBin) ->
-	rabbit_misc:r(VHost, routing_key, RKBin).
+    rabbit_misc:r(VHost, routing_key, RKBin).
