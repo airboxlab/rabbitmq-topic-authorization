@@ -68,9 +68,6 @@ check_write_permitted(Resource, User) ->
 check_read_permitted(Resource, User) ->
     check_resource_access(User, Resource, read).
 
-check_configure_permitted(Resource, User) ->
-    check_resource_access(User, Resource, configure).
-
 intercept(#'basic.publish'{routing_key = RoutingKeyBin} = Method, 
           Content, 
           _State = #state{user = User, vhost = VHost}) ->
@@ -89,7 +86,7 @@ intercept(#'exchange.unbind'{routing_key = RoutingKeyBin} = Method,
           Content, 
           _State = #state{user = User, vhost = VHost}) ->
     RoutingKey = rk(VHost, RoutingKeyBin),
-    check_configure_permitted(RoutingKey, User),
+    check_read_permitted(RoutingKey, User),
     {Method, Content};
 
 intercept(#'queue.bind'{routing_key = RoutingKeyBin} = Method, 
@@ -103,7 +100,7 @@ intercept(#'queue.unbind'{routing_key = RoutingKeyBin} = Method,
           Content, 
           _State = #state{user = User, vhost = VHost}) ->
     RoutingKey = rk(VHost, RoutingKeyBin),
-    check_configure_permitted(RoutingKey, User),
+    check_read_permitted(RoutingKey, User),
     {Method, Content};
 
 intercept(Method, Content, _State) ->
