@@ -37,6 +37,8 @@ rabbitmq-plugins enable rabbitmq_topic_authorization
 The plugin will then hook into the `basic.publish`, `exchange.bind`, `exchange.unbind`, `queue.bind` and `queue.unbind` processes in order to
 check current user authorizations against related routing key.
 
+If you're using [rabbitmq-auth-backend-http plugin](https://github.com/rabbitmq/rabbitmq-auth-backend-http), you will get a call to the `resource/` end point with `?resource=routing_key&name=<routing key definition>`
+
 ## Limitations ##
 
 The plugin hooks into the `basic.publish`, `exchange.bind` and `queue.bind` paths, so there could be a significant performance impact, especially when using external authentication mechanisms (e.G. ldap or http auth plugins). It uses a channel-scoped cache to reduce latency.
