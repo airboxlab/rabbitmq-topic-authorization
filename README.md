@@ -34,7 +34,7 @@ Just enable the plugin with the following command:
 rabbitmq-plugins enable rabbitmq_topic_authorization
 ```
 
-The plugin will then hook into the `basic.publish`, `exchange.bind` and `queue.bind` processes in order to
+The plugin will then hook into the `basic.publish`, `exchange.bind`, `exchange.unbind`, `queue.bind` and `queue.unbind` processes in order to
 check current user authorizations against related routing key.
 
 ## Limitations ##
