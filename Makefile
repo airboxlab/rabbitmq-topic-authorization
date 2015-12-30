@@ -1,8 +1,7 @@
 PROJECT = rabbitmq_topic_authorization
 
-DEPS = amqp_client
-
-TEST_DEPS = rabbit
+DEPS = rabbit
+TEST_DEPS = amqp_client
 
 DEP_PLUGINS = rabbit_common/mk/rabbitmq-plugin.mk
 
