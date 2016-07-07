@@ -12,16 +12,30 @@ To use this plugin you will have to build RabbitMQ from master and
 then build the plugin against it, since it depends on a new
 _interceptors_ API that's not yet available on the 3.5.x series.
 
-Install and setup the RabbitMQ Public Umbrella as explained here:
-[http://www.rabbitmq.com/plugin-development.html#getting-started](http://www.rabbitmq.com/plugin-development.html#getting-started).
+Follow plugin development instructions:
+[http://www.rabbitmq.com/plugin-development.html](http://www.rabbitmq.com/plugin-development.html).
 
-Then `cd` into the umbrella folder and type:
+TL;DR: 
 
+    $ git clone https://github.com/rabbitmq/rabbitmq-server.git
+    $ cd rabbitmq-server
+    $ make
+    $ cd ../
     $ git clone git://github.com/airboxlab/rabbitmq-topic-authorization.git
     $ cd rabbitmq-topic-authorization
-    $ make
+    $ make dist
 
-Finally copy all the `*.ez` files inside the `dist` folder to the
+Note: if you get a 
+
+```bash
+error: rabbitmq-components.mk must be updated!
+```
+
+Execute
+
+    $ make rabbitmq-components-mk
+
+Finally copy the `rabbitmq_topic_authorization.ez` file inside the `plugins` folder to the
 `$RABBITMQ_HOME/plugins` folder. Don't copy the file
 `rabbit_common-x.y.z` since it's not needed inside the broker
 installation.
