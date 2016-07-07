@@ -17,7 +17,7 @@ Install and setup the RabbitMQ Public Umbrella as explained here:
 
 Then `cd` into the umbrella folder and type:
 
-    $ git clone git://github.com/rabbitmq/rabbitmq-topic-authorization.git
+    $ git clone git://github.com/airboxlab/rabbitmq-topic-authorization.git
     $ cd rabbitmq-topic-authorization
     $ make
 
