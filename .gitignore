@@ -4,3 +4,4 @@
 .erlang.mk
 /plugins/
 /*.d
+deps/
