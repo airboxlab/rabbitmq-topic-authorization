@@ -8,6 +8,12 @@ This plugin targets RabbitMQ 3.6.0 and later versions.
 
 ## Installing ##
 
+### Downloading ###
+
+Check [https://github.com/airboxlab/rabbitmq-topic-authorization/releases](releases) page
+
+### Building from source ###
+
 To use this plugin you will have to build RabbitMQ from master and
 then build the plugin against it, since it depends on a new
 _interceptors_ API that's not yet available on the 3.5.x series.
