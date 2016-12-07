@@ -10,7 +10,7 @@ This plugin targets RabbitMQ 3.6.0 and later versions.
 
 ### Downloading ###
 
-Check [https://github.com/airboxlab/rabbitmq-topic-authorization/releases](releases) page
+Check [https://github.com/airboxlab/rabbitmq-topic-authorization/releases](https://github.com/airboxlab/rabbitmq-topic-authorization/releases) page
 
 ### Building from source ###
 
