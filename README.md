@@ -21,31 +21,6 @@ _interceptors_ API that's not yet available on the 3.5.x series.
 Follow plugin development instructions:
 [http://www.rabbitmq.com/plugin-development.html](http://www.rabbitmq.com/plugin-development.html).
 
-TL;DR: 
-
-    $ git clone https://github.com/rabbitmq/rabbitmq-server.git
-    $ cd rabbitmq-server
-    $ make
-    $ cd ../
-    $ git clone git://github.com/airboxlab/rabbitmq-topic-authorization.git
-    $ cd rabbitmq-topic-authorization
-    $ make dist
-
-Note: if you get a 
-
-```bash
-error: rabbitmq-components.mk must be updated!
-```
-
-Execute
-
-    $ make rabbitmq-components-mk
-
-Finally copy the `rabbitmq_topic_authorization.ez` file inside the `plugins` folder to the
-`$RABBITMQ_HOME/plugins` folder. Don't copy the file
-`rabbit_common-x.y.z` since it's not needed inside the broker
-installation.
-
 ## Usage ##
 
 Just enable the plugin with the following command:
