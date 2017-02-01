@@ -1,7 +1,13 @@
 PROJECT = rabbitmq_topic_authorization
+PROJECT_DESCRIPTION = RabbitMQ Topic Authorization
+PROJECT_MOD = rabbit_topic_authorization
 
-DEPS = rabbit_common
-TEST_DEPS = rabbit amqp_client
+define PROJECT_APP_EXTRA_KEYS
+	{broker_version_requirements, []}
+endef
+
+DEPS = rabbit_common rabbit amqp_client
+TEST_DEPS = rabbitmq_ct_helpers rabbitmq_ct_client_helpers
 
 DEP_PLUGINS = rabbit_common/mk/rabbitmq-plugin.mk
 
